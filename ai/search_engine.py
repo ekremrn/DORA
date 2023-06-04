@@ -20,7 +20,7 @@ def search(image_input, features, first=20):
     if feat is None:
         return {}
 
-    sorted_similarities = cosine_similarity(features, b).sort(descending=True)
+    sorted_similarities = cosine_similarity(features, feat).sort(descending=True)
 
     result = {
         "indices": sorted_similarities.indices.tolist()[:first],

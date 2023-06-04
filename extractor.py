@@ -30,13 +30,13 @@ process = tqdm(
 )
 for _, row in process:
     row = row.to_dict()
-    if COLLECTION.find_one({"id": row.get("id")}):
+    row["_id"] = row.pop("id")
+    if COLLECTION.find_one({"_id": row.get("_id")}):
         continue
     if any(row.get(key) is None for key in row.keys()):
         continue
     if row.get("thumb_image").get("path") is None:
         continue
-
     # Image Feature
     image_path = os.path.join(IMAGESPATH, row.get("thumb_image").get("path"))
 

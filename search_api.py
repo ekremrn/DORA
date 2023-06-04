@@ -27,9 +27,9 @@ DB = CLIENT[DATABASE_NAME]
 COLLECTION = DB[DATABASE_COLLECTION]
 
 # Convert MongoDB data to a dictionary with "id" and "feature" keys
-DATA = [row for row in tqdm(COLLECTION.find({}, {"id": 1, "feature": 1, "_id": 0}))]
+DATA = [row for row in tqdm(COLLECTION.find({}, {"_id": 1, "feature": 1}))]
 DATA = {
-    "id": [row.get("id") for row in DATA],
+    "_id": [row.get("_id") for row in DATA],
     "feature": Tensor([row.get("feature") for row in DATA]),
 }
 
@@ -44,8 +44,8 @@ def search(input: Dict):
     # Perform image search using the search_engine module
     output = se.search(image, DATA.get("feature"))
     # Retrieve the IDs of the search results
-    ids = [DATA.get("id")[i] for i in output.get("indices")]
+    ids = [DATA.get("_id")[i] for i in output.get("indices")]
     # Retrieve data from MongoDB for the search results
-    data_list = list(COLLECTION.find({"id": {"$in": ids}}, {"feature": 0, "_id": 0}))
+    data_list = list(COLLECTION.find({"_id": {"$in": ids}}, {"feature": 0, "_id": 0}))
     # Return the search results as a list of dictionaries
     return data_list
