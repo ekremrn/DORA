@@ -108,7 +108,7 @@ def main():
         with button_col:
             run_button = st.button("Benzer Ürünleri Bul")
         if run_button:
-            input_image = Image.open(uploaded_file) 
+            input_image = Image.open(uploaded_file).convert('RGB')
             request_input = {"data" : image_to_base64(input_image)}
             response = requests.post(API_URL, json=request_input)
             if response.status_code != 200:
