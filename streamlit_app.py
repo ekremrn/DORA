@@ -3,10 +3,8 @@ import requests
 import streamlit as st
 
 from PIL import Image
-from dotenv import load_dotenv
 from helpers.data_handlers import image_to_base64
 
-load_dotenv()
 
 API_URL = str(os.getenv("API_URL"))
 
