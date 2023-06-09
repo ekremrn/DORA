@@ -1,7 +1,3 @@
 uvicorn
 fastapi
 Pillow
-pickle
-torch
-pymongo
-boto3
