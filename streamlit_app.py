@@ -99,7 +99,7 @@ def main():
         unsafe_allow_html=True,
     )
 
-    uploaded_file = st.file_uploader("Fotoğraf yükle", type=["jpg", "jpeg", "png"])
+    uploaded_file = st.file_uploader("Fotoğraf yükle", type=["jpg", "jpeg", "png", "webp"])
     if uploaded_file is not None:
         pil_img = expand2square(uploaded_file, "white")
         uploaded_img_col, button_col = st.columns([1, 1])
